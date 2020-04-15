@@ -1,13 +1,16 @@
 export interface CookieConfig {
-    name?: string;
+    name: string;
     zIndex?: number;
     urlWhitelist?: string[];
-    consentAcceptStatusMsg?: string;
-    consentDeclineStatusMsg?: string;
-    noCookieStatusMsg?: string;
-    dateFormat?: string;
-    timeFormat?: string;
+    consentAcceptStatusMsg: string;
+    consentDeclineStatusMsg: string;
+    noCookieStatusMsg: string;
+    dateFormat: string;
+    timeFormat: string;
+    lifetime: number;
 }
+
+export type CookieConfigInitialProps = Partial<CookieConfig>;
 
 export const CookieConfigDefaults: CookieConfig = {
     name: "cookie-consent",
@@ -15,7 +18,8 @@ export const CookieConfigDefaults: CookieConfig = {
     consentDeclineStatusMsg: "Abgelehnt am %DATE% um %TIME% Uhr",
     noCookieStatusMsg: "-",
     dateFormat: "dd.mm.yy",
-    timeFormat: "hh:mm"
+    timeFormat: "hh:mm",
+    lifetime: 365
 };
 
 export interface CookieConsentData {

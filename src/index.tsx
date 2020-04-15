@@ -13,7 +13,9 @@ import {
     CookieConfigDefaults,
     Cookie,
     CookieConsentData,
-    getCookie
+    getCookie,
+    setCookie,
+    CookieConfigInitialProps
 } from "./utils/cookie";
 import {
     bindConsentButtons,
@@ -27,13 +29,14 @@ type RenderProps = {
     handleDecline: () => void;
 };
 
-const CookieConsent: React.FC<CookieConfig & {
+const CookieConsent: React.FC<CookieConfigInitialProps & {
     className?: string;
     children: (props: RenderProps) => React.ReactElement;
 }> = props => {
     const {
         zIndex,
         name,
+        lifetime,
         urlWhitelist,
         consentAcceptStatusMsg,
         consentDeclineStatusMsg,
@@ -51,7 +54,7 @@ const CookieConsent: React.FC<CookieConfig & {
     React.useEffect(() => {
         bindConsentButtons(() => setIsVisible(true));
 
-        const cookie = getCookie(name!) as Cookie<CookieConsentData>;
+        const cookie = getCookie(name) as Cookie<CookieConsentData>;
         const containsWhitelist = isUrlInWhitelist(
             window.location.pathname,
             urlWhitelist
@@ -67,12 +70,12 @@ const CookieConsent: React.FC<CookieConfig & {
         const cookie = getCookie(name!) as Cookie<CookieConsentData>;
 
         const str = !cookie
-            ? noCookieStatusMsg!
+            ? noCookieStatusMsg
             : cookie.data.consent
-            ? consentAcceptStatusMsg!
-            : consentDeclineStatusMsg!;
+            ? consentAcceptStatusMsg
+            : consentDeclineStatusMsg;
 
-        updateConsentStatusElements(cookie, str, dateFormat!, timeFormat!);
+        updateConsentStatusElements(cookie, str, dateFormat, timeFormat);
     }, [isVisible]);
 
     if (!isVisible) return null;
@@ -85,9 +88,28 @@ const CookieConsent: React.FC<CookieConfig & {
                 {children({
                     handleDecline: () => {
                         console.log("decline");
+                        setCookie<CookieConsentData>(
+                            name,
+                            {
+                                consent: false,
+                                updatedAt: new Date().getTime()
+                            },
+                            lifetime
+                        );
+                        setIsVisible(false);
                     },
                     handleAccept: () => {
                         console.log("accept");
+                        setCookie<CookieConsentData>(
+                            name,
+                            {
+                                consent: true,
+                                updatedAt: new Date().getTime()
+                            },
+                            lifetime
+                        );
+                        setIsVisible(false);
+                        activateTrackingScripts();
                     }
                 })}
             </div>
