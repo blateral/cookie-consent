@@ -4,8 +4,38 @@ import {
     CookieContent,
     CookieContentDefaults,
     CookieContentInitalProps,
-    CookieConfigInitialProps
+    CookieConfigInitialProps,
+    Cookie,
+    CookieConsentData,
+    getCookie,
+    setCookie
 } from "./utils/cookie";
+import {
+    bindConsentButtons,
+    isUrlInWhitelist,
+    activateTrackingScripts,
+    updateConsentStatusElements
+} from "./utils/mutations";
+
+const createStore = (initialState = {}) => {
+    let state: { [key: string]: any } = initialState;
+    let listeners: Array<() => void> = [];
+
+    return {
+        getState: () => state,
+        setState: (newState: any) => {
+            state = {
+                ...state,
+                ...newState
+            };
+
+            listeners.forEach(l => l());
+        },
+        subscribe: (l: any) => {
+            listeners = [...listeners, l];
+        }
+    };
+};
 
 const buildCookieMarkup = ({
     icon,
@@ -13,10 +43,16 @@ const buildCookieMarkup = ({
     text,
     labelAccept,
     labelDecline,
-    zIndex
-}: CookieContent & { zIndex?: number }) => {
+    zIndex,
+    handleAccept,
+    handleDecline
+}: CookieContent & {
+    zIndex?: number;
+    handleDecline: () => void;
+    handleAccept: () => void;
+}) => {
     const $CookieView = document.createElement("div");
-    $CookieView.className = "CookieConsent";
+    $CookieView.className = "CookieConsent  isHidden";
 
     if (zIndex) {
         $CookieView.style.zIndex = zIndex.toString();
@@ -58,9 +94,7 @@ const buildCookieMarkup = ({
         "button-cookie-consent-accept"
     );
     $CookieActionAccept.innerText = labelAccept;
-    $CookieActionAccept.addEventListener("click", () => {
-        console.log("accept");
-    });
+    $CookieActionAccept.addEventListener("click", handleAccept);
 
     const $CookieActionDecline = document.createElement("button");
     $CookieActionDecline.className = "CookieConsent__action";
@@ -69,9 +103,7 @@ const buildCookieMarkup = ({
         "button-cookie-consent-decline"
     );
     $CookieActionDecline.innerText = labelDecline;
-    $CookieActionDecline.addEventListener("click", () => {
-        console.log("decline");
-    });
+    $CookieActionDecline.addEventListener("click", handleDecline);
 
     $CookieActions.appendChild($CookieActionDecline);
     $CookieActions.appendChild($CookieActionAccept);
@@ -96,14 +128,14 @@ if ($mountPointCookie) {
 
     const {
         zIndex,
-        // name,
-        // lifetime,
-        // urlWhitelist,
-        // consentAcceptStatusMsg,
-        // consentDeclineStatusMsg,
-        // noCookieStatusMsg,
-        // dateFormat,
-        // timeFormat,
+        name,
+        lifetime,
+        urlWhitelist,
+        consentAcceptStatusMsg,
+        consentDeclineStatusMsg,
+        noCookieStatusMsg,
+        dateFormat,
+        timeFormat,
         icon,
         title,
         text,
@@ -115,15 +147,70 @@ if ($mountPointCookie) {
         ...initialState
     } as CookieConfig & CookieContent;
 
-    const generatedCookie = buildCookieMarkup({
+    const store = createStore({ isVisible: false });
+
+    const $Cookie = buildCookieMarkup({
         icon,
         title,
         text,
         labelAccept,
         labelDecline,
-        zIndex
+        zIndex,
+        handleDecline: () => {
+            console.log("decline");
+            setCookie<CookieConsentData>(
+                name,
+                {
+                    consent: false,
+                    updatedAt: new Date().getTime()
+                },
+                lifetime
+            );
+
+            store.setState({ isVisible: false });
+        },
+        handleAccept: () => {
+            console.log("accept");
+            setCookie<CookieConsentData>(
+                name,
+                {
+                    consent: true,
+                    updatedAt: new Date().getTime()
+                },
+                lifetime
+            );
+            store.setState({ isVisible: false });
+            activateTrackingScripts();
+        }
     });
 
     $mountPointCookie.innerHTML = "";
-    $mountPointCookie.appendChild(generatedCookie);
+    $mountPointCookie.appendChild($Cookie);
+
+    store.subscribe(() => {
+        $Cookie.classList.toggle("isHidden", !store.getState().isVisible);
+    });
+    store.subscribe(() => {
+        const cookie = getCookie(name) as Cookie<CookieConsentData>;
+
+        const str = !cookie
+            ? noCookieStatusMsg
+            : cookie.data.consent
+            ? consentAcceptStatusMsg
+            : consentDeclineStatusMsg;
+
+        updateConsentStatusElements(cookie, str, dateFormat, timeFormat);
+    });
+
+    bindConsentButtons(() => store.setState({ isVisible: true }));
+    const cookie = getCookie(name) as Cookie<CookieConsentData>;
+    const containsWhitelist = isUrlInWhitelist(
+        window.location.pathname,
+        urlWhitelist
+    );
+
+    if (!containsWhitelist) store.setState({ isVisible: !cookie });
+    if (cookie && cookie.data.consent) {
+        activateTrackingScripts();
+    }
 }

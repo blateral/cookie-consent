@@ -65,7 +65,7 @@ const CookieConsent: React.FC<CookieConfigInitialProps & {
     }, []);
 
     React.useEffect(() => {
-        const cookie = getCookie(name!) as Cookie<CookieConsentData>;
+        const cookie = getCookie(name) as Cookie<CookieConsentData>;
 
         const str = !cookie
             ? noCookieStatusMsg
