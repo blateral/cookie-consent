@@ -22,6 +22,22 @@ export const CookieConfigDefaults: CookieConfig = {
     lifetime: 365
 };
 
+export interface CookieContent {
+    icon?: string;
+    title?: string;
+    text: string;
+    labelAccept: string;
+    labelDecline: string;
+}
+export type CookieContentInitalProps = Partial<CookieContent>;
+
+export const CookieContentDefaults: CookieContent = {
+    text:
+        'Wir verwenden Cookies, um Zugriffe auf unsere Website zu analysieren. Dadurch können wir unsere Webseite für Sie verbessern. Unsere Partner führen diese Informationen möglicherweise mit weiteren Daten zusammen, die Sie ihnen bereitgestellt haben oder die im Rahmen der Nutzung der Dienste gesammelt wurden. Wenn Sie der Verwendung nicht zustimmen, benutzen wir ausschließlich Cookies, die für die Funktionalität der Webseite essentiell sind. Weitere Informationen finden Sie unter <a href="impressum">Impressum</a> und <a href="datenschutz">Datenschutz</a>.',
+    labelAccept: "Cookies akzeptieren",
+    labelDecline: "Cookies ablehnen"
+};
+
 export interface CookieConsentData {
     consent: boolean;
     updatedAt: number;
