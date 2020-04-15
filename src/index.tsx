@@ -32,7 +32,7 @@ type RenderProps = {
 const CookieConsent: React.FC<CookieConfigInitialProps & {
     className?: string;
     children: (props: RenderProps) => React.ReactElement;
-}> = props => {
+}> = ({ className, children, ...props }) => {
     const {
         zIndex,
         name,
@@ -42,13 +42,11 @@ const CookieConsent: React.FC<CookieConfigInitialProps & {
         consentDeclineStatusMsg,
         noCookieStatusMsg,
         dateFormat,
-        timeFormat,
-        className,
-        children
+        timeFormat
     } = {
         ...CookieConfigDefaults,
         ...props
-    };
+    } as CookieConfig;
     const [isVisible, setIsVisible] = React.useState(false);
 
     React.useEffect(() => {
