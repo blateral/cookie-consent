@@ -22,8 +22,14 @@ import {
     updateConsentStatusElements
 } from "./utils/mutations";
 
+type RenderProps = {
+    handleAccept: () => void;
+    handleDecline: () => void;
+};
+
 const CookieConsent: React.FC<CookieConfig & {
     className?: string;
+    children: (props: RenderProps) => React.ReactElement;
 }> = props => {
     const {
         zIndex,
@@ -75,7 +81,16 @@ const CookieConsent: React.FC<CookieConfig & {
             className={`${styles.CookieConsent} ${className}`}
             style={zIndex ? { zIndex } : {}}
         >
-            <div className={styles.CookieConsent__content}>{children}</div>
+            <div className={styles.CookieConsent__content}>
+                {children({
+                    handleDecline: () => {
+                        console.log("decline");
+                    },
+                    handleAccept: () => {
+                        console.log("accept");
+                    }
+                })}
+            </div>
         </div>
     );
 };
