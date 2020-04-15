@@ -12,16 +12,15 @@ const buildCookieMarkup = ({
     title,
     text,
     labelAccept,
-    labelDecline
-}: {
-    icon?: string;
-    title?: string;
-    text: string;
-    labelAccept: string;
-    labelDecline: string;
-}) => {
+    labelDecline,
+    zIndex
+}: CookieContent & { zIndex?: number }) => {
     const $CookieView = document.createElement("div");
     $CookieView.className = "CookieConsent";
+
+    if (zIndex) {
+        $CookieView.style.zIndex = zIndex.toString();
+    }
 
     const $CookieViewContent = document.createElement("div");
     $CookieViewContent.className = "CookieConsent__content";
@@ -97,14 +96,14 @@ if ($mountPointCookie) {
 
     const {
         zIndex,
-        name,
-        lifetime,
-        urlWhitelist,
-        consentAcceptStatusMsg,
-        consentDeclineStatusMsg,
-        noCookieStatusMsg,
-        dateFormat,
-        timeFormat,
+        // name,
+        // lifetime,
+        // urlWhitelist,
+        // consentAcceptStatusMsg,
+        // consentDeclineStatusMsg,
+        // noCookieStatusMsg,
+        // dateFormat,
+        // timeFormat,
         icon,
         title,
         text,
@@ -121,8 +120,10 @@ if ($mountPointCookie) {
         title,
         text,
         labelAccept,
-        labelDecline
+        labelDecline,
+        zIndex
     });
 
-    console.log(generatedCookie);
+    $mountPointCookie.innerHTML = "";
+    $mountPointCookie.appendChild(generatedCookie);
 }
