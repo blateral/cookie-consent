@@ -27,6 +27,12 @@ import {
 type RenderProps = {
     handleAccept: () => void;
     handleDecline: () => void;
+    additionalDeclineProps: {
+        ["data-gtm"]: string;
+    };
+    additionalAcceptProps: {
+        ["data-gtm"]: string;
+    };
 };
 
 const CookieConsent: React.FC<CookieConfigInitialProps & {
@@ -108,6 +114,12 @@ const CookieConsent: React.FC<CookieConfigInitialProps & {
                         );
                         setIsVisible(false);
                         activateTrackingScripts();
+                    },
+                    additionalAcceptProps: {
+                        ["data-gtm"]: "button-cookie-consent-accept"
+                    },
+                    additionalDeclineProps: {
+                        ["data-gtm"]: "button-cookie-consent-decline"
                     }
                 })}
             </div>

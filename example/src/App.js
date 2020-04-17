@@ -6,7 +6,12 @@ import "cookie-consent/dist/index.css";
 const App = () => {
     return (
         <Cookie.View>
-            {({ handleAccept, handleDecline }) => (
+            {({
+                handleAccept,
+                handleDecline,
+                additionalDeclineProps,
+                additionalAcceptProps
+            }) => (
                 <>
                     <Cookie.Icon src="http://unsplash.it/100" />
                     <Cookie.Title>
@@ -26,10 +31,17 @@ const App = () => {
                         <a href="datenschutz">Datenschutz</a>.
                     </Cookie.Text>
                     <Cookie.ActionContainer>
-                        <Cookie.Action onClick={handleDecline}>
+                        <Cookie.Action
+                            onClick={handleDecline}
+                            {...additionalDeclineProps}
+                        >
                             Cookies ablehnen
                         </Cookie.Action>
-                        <Cookie.Action onClick={handleAccept} type="accept">
+                        <Cookie.Action
+                            onClick={handleAccept}
+                            {...additionalAcceptProps}
+                            type="accept"
+                        >
                             Cookies akzeptieren
                         </Cookie.Action>
                     </Cookie.ActionContainer>
