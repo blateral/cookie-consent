@@ -1,7 +1,7 @@
 {
     "name": "cookie-consent-example",
     "homepage": "https://ic3m3n.github.io/cookie-consent",
-    "version": "0.0.0",
+    "version": "0.1.0",
     "private": true,
     "dependencies": {
         "react": "link:../node_modules/react",
