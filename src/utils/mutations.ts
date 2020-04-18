@@ -3,7 +3,7 @@ import { CookieConsentData, Cookie } from "./cookie";
 
 export const bindConsentButtons = (callback: () => void) => {
     const allConsentButtons = document.querySelectorAll(
-        "[data-consent-button]"
+        "[data-consent-button], .cookie-consent-button"
     );
 
     for (var i = 0, len = allConsentButtons.length; i < len; i++) {
@@ -52,7 +52,7 @@ export const updateConsentStatusElements = (
     timeFormat: string
 ) => {
     const allConsentStatusElements = document.querySelectorAll(
-        "[data-consent-status]"
+        "[data-consent-status], .cookie-consent-status"
     );
 
     // render status inside defined dom elements without react
