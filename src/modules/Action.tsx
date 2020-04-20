@@ -2,7 +2,7 @@ import * as React from "react";
 import styles from "./../styles.css";
 
 export const ActionContainer: React.FC<{
-    className?: "string";
+    className?: string;
 }> = ({ className = "", children }) => (
     <div className={`${styles.CookieConsent__actions} ${className}`}>
         {children}
@@ -13,7 +13,7 @@ export const Action: React.FC<{
     buttonTag?: "a" | "button";
     onClick?: () => void;
     type?: "accept" | "decline";
-    className?: "string";
+    className?: string;
     [key: string]: any;
 }> = ({
     buttonTag: ButtonTag = "button",

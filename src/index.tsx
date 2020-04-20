@@ -38,7 +38,7 @@ type RenderProps = {
 const CookieConsent: React.FC<CookieConfigInitialProps & {
     className?: string;
     children: (props: RenderProps) => React.ReactElement;
-}> = ({ className, children, ...props }) => {
+}> = ({ className = "", children, ...props }) => {
     const {
         zIndex,
         name,
