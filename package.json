@@ -1,5 +1,5 @@
 {
-    "name": "@ic3m3n/cookie-consent",
+    "name": "@digiii/cookie-consent",
     "version": "0.1.2",
     "description": "Generic consent cookie",
     "author": "Alexander Rieß<alexander.riess@blateral.com>, Lukas Wochner<lukas.wochner@blateral.com>",

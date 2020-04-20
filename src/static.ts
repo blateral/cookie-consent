@@ -52,7 +52,7 @@ const buildCookieMarkup = ({
     handleAccept: () => void;
 }) => {
     const $CookieView = document.createElement("div");
-    $CookieView.className = "CookieConsent  isHidden";
+    $CookieView.className = "CookieConsent isHidden";
 
     if (zIndex) {
         $CookieView.style.zIndex = zIndex.toString();
