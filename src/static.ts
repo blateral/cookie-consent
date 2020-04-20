@@ -97,7 +97,8 @@ const buildCookieMarkup = ({
     $CookieActionAccept.addEventListener("click", handleAccept);
 
     const $CookieActionDecline = document.createElement("button");
-    $CookieActionDecline.className = "CookieConsent__action";
+    $CookieActionDecline.className =
+        "CookieConsent__action  CookieConsent__action--decline";
     $CookieActionDecline.setAttribute(
         "data-gtm",
         "button-cookie-consent-decline"

@@ -26,7 +26,9 @@ export const Action: React.FC<{
     <ButtonTag
         onClick={onClick}
         className={`${styles.CookieConsent__action} ${
-            type === "accept" ? styles["CookieConsent__action--accept"] : ""
+            type === "accept"
+                ? styles["CookieConsent__action--accept"]
+                : styles["CookieConsent__action--decline"]
         } ${className}`}
         {...rest}
     >
