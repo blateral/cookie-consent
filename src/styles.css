@@ -82,15 +82,10 @@
 
 .CookieConsent__actions {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
     justify-content: center;
     align-items: center;
-}
-
-@media (min-width: 420px) {
-    .CookieConsent__actions {
-        flex-direction: row;
-    }
 }
 
 .CookieConsent__actions > * {
