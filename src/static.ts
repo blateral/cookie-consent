@@ -190,6 +190,7 @@ if ($mountPointCookie) {
     store.subscribe(() => {
         $Cookie.classList.toggle("isHidden", !store.getState().isVisible);
     });
+
     store.subscribe(() => {
         const cookie = getCookie(name) as Cookie<CookieConsentData>;
 
