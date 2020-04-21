@@ -4,9 +4,11 @@ const path = require("path");
 module.exports = {
     mode: "production",
     entry: ["./src/static.ts"],
+    /*
     watchOptions: {
-        ignored: ["files/**/*.js", "node_modules/**"]
+        ignored: ["node_modules/**", "dist/**"]
     },
+    */
     output: {
         filename: "cookie-consent.min.js",
         path: path.resolve(__dirname, "example-static")
@@ -17,7 +19,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.ts/,
+                test: /\.ts?$/,
                 use: "ts-loader",
                 exclude: /node_modules/
             }
