@@ -1,3 +1,4 @@
+require("./styles.css");
 import {
     CookieConfigDefaults,
     CookieConfig,
