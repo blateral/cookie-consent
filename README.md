@@ -67,12 +67,12 @@ class Example extends Component {
 
 Inside the `Cookie.View` element it is necessary to define a function with the following props (called RenderProps):
 
-| Name                       |           Type            |                              Description                               |
-| -------------------------- | :-----------------------: | :--------------------------------------------------------------------: |
-| **handleAccept**           |        () => void         |              Callback function for consent accept events               |
-| **handleDecline**          |        () => void         |              Callback function for consent decline events              |
-| **additionalAcceptProps**  | { ["data-gtm"]: string; } | Object that contains package defined props for consent accept element  |
-| **additionalDeclineProps** | { ["data-gtm"]: string; } | Object that contains package defined props for consent decline element |
+| Name                       |          Type           |                                Description                                |
+| -------------------------- | :---------------------: | :-----------------------------------------------------------------------: |
+| **handleAccept**           |       () => void        |                 Function to call on consent accept events                 |
+| **handleDecline**          |       () => void        |                Function to call on consent decline events                 |
+| **additionalAcceptProps**  | {["data-gtm"]: string;} | Object that contains package predefined props for consent accept element  |
+| **additionalDeclineProps** | {["data-gtm"]: string;} | Object that contains package predefined props for consent decline element |
 
 ## License
 
