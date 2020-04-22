@@ -62,9 +62,11 @@ export const setCookie = <T>(
 
     // set cookie value
     let valueString = "";
-    for (let [key, value] of Object.entries(data)) {
-        valueString += `${key}=${value}|`;
+    let dataKeys = Object.keys(data);
+    for (let i = 0; i < dataKeys.length; i++) {
+        valueString += `${dataKeys[i]}=${data[dataKeys[i]]}|`;
     }
+
     cookieString += encodeURIComponent(
         valueString.substr(0, valueString.length - 1)
     );
@@ -103,7 +105,7 @@ export const getCookie = <T>(name: string): Cookie<T> | undefined => {
             const value: any = valueArray[i].value;
 
             // checking for right types
-            if (!Number.isNaN(Number(value)))
+            if (!isNaN(Number(value)))
                 cookieData[valueArray[i].key] = Number(value) as number;
             else if (isBoolean(value))
                 cookieData[valueArray[i].key] = stringToBoolean(
@@ -130,4 +132,9 @@ const stringToBoolean = (value: string | number | boolean) => {
 
 const isBoolean = (value: string | number | boolean) => {
     return value === "true" || value === "false";
+};
+
+const isNaN = (value: number) => {
+    if (Number.isNaN !== undefined) return Number.isNaN(value);
+    else return value !== value;
 };

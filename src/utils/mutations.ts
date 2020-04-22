@@ -13,7 +13,7 @@ export const bindConsentButtons = (callback: () => void) => {
 
 export const activateTrackingScripts = () => {
     const scriptElements = document.querySelectorAll(
-        "script[type='text/consent_banner_script']"
+        "script[type='text/consent_banner_script'], script[type='text/cookie-consent-script']"
     );
 
     let i = scriptElements.length;
@@ -27,7 +27,10 @@ export const activateTrackingScripts = () => {
         document.body.appendChild(newScriptElement);
 
         // delete old helper element
-        scriptElements[i].remove();
+        if (scriptElements[i].parentNode) {
+            scriptElements[i].parentNode?.removeChild(scriptElements[i]);
+        }
+        // scriptElements[i].remove();
     }
 };
 
