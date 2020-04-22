@@ -196,7 +196,7 @@ if ($mountPointCookie) {
             : "CookieConsent isHidden";
     });
 
-    store.subscribe(() => {
+    const updateStatusElements = () => {
         const cookie = getCookie(name) as Cookie<CookieConsentData>;
 
         const str = !cookie
@@ -206,7 +206,10 @@ if ($mountPointCookie) {
             : consentDeclineStatusMsg;
 
         updateConsentStatusElements(cookie, str, dateFormat, timeFormat);
-    });
+    };
+
+    store.subscribe(updateStatusElements);
+    updateStatusElements();
 
     bindConsentButtons(() => store.setState({ isVisible: true }));
     const cookie = getCookie(name) as Cookie<CookieConsentData>;
