@@ -38,7 +38,7 @@ type RenderProps = {
 const CookieConsent: React.FC<CookieConfigInitialProps & {
     className?: string;
     children: (props: RenderProps) => React.ReactElement;
-}> = ({ className, children, ...props }) => {
+}> = ({ className = "", children, ...props }) => {
     const {
         zIndex,
         name,
@@ -63,7 +63,6 @@ const CookieConsent: React.FC<CookieConfigInitialProps & {
             window.location.pathname,
             urlWhitelist
         );
-
         if (!containsWhitelist) setIsVisible(!cookie);
         if (cookie && cookie.data.consent) {
             activateTrackingScripts();

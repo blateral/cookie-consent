@@ -1,3 +1,4 @@
+require("./styles.css");
 import {
     CookieConfigDefaults,
     CookieConfig,
@@ -52,7 +53,7 @@ const buildCookieMarkup = ({
     handleAccept: () => void;
 }) => {
     const $CookieView = document.createElement("div");
-    $CookieView.className = "CookieConsent  isHidden";
+    $CookieView.className = "CookieConsent isHidden";
 
     if (zIndex) {
         $CookieView.style.zIndex = zIndex.toString();
@@ -189,8 +190,12 @@ if ($mountPointCookie) {
     $mountPointCookie.appendChild($Cookie);
 
     store.subscribe(() => {
-        $Cookie.classList.toggle("isHidden", !store.getState().isVisible);
+        // $Cookie.classList.toggle("isHidden", !store.getState().isVisible);
+        $Cookie.className = store.getState().isVisible
+            ? "CookieConsent"
+            : "CookieConsent isHidden";
     });
+
     store.subscribe(() => {
         const cookie = getCookie(name) as Cookie<CookieConsentData>;
 
@@ -205,12 +210,12 @@ if ($mountPointCookie) {
 
     bindConsentButtons(() => store.setState({ isVisible: true }));
     const cookie = getCookie(name) as Cookie<CookieConsentData>;
-    const containsWhitelist = isUrlInWhitelist(
+    const isInWhitelist = isUrlInWhitelist(
         window.location.pathname,
         urlWhitelist
     );
 
-    if (!containsWhitelist) store.setState({ isVisible: !cookie });
+    if (!isInWhitelist) store.setState({ isVisible: !cookie });
     if (cookie && cookie.data.consent) {
         activateTrackingScripts();
     }
