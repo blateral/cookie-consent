@@ -93,11 +93,23 @@ Subcomponents like `<Cookie.Icon src="..." />` or `<Cookie.Title>` can be used t
 
 ### Use as static native JavaScript library
 
-dr
+For non-react projects it is possible to import the cookie consent banner as a single JavaScript file called `cookie-consent.min.js`. It can be found inside the repository folder `example-static`. To render the banner into the DOM you must provide a mount point element with the id `cookie-consent`. Additional properties can be defined as a JSON-Object inside a script tag.
+
+```html
+<div id="cookie-consent">
+    <script type="text/json">
+        {
+            "zIndex": 1,
+            "icon": "...",
+            "title": "Verwendung von Cookies für Analyse- und Marketingzwecke"
+        }
+    </script>
+</div>
+```
 
 ## Date and Time formats
 
-To show the date and time of the last cookie consent interaction inside the status message you can pass specific placeholders to the string. They are replaced by React on runtime.
+To show the date and time of the last cookie consent interaction inside the status message you can pass specific placeholders to the string. They are replaced with the values on runtime.
 
 | Placeholder | Output                       |
 | :---------- | :--------------------------- |
@@ -120,20 +132,18 @@ The parameters `dateFormat` and `timeFormat` controlling the output of date and 
 
 ## Output Status message
 
-To output the consent status message add the attribute `data-consent-status` to one or multiple DOM Elements before the `cookie-consent.min.js` import.
+To output the consent status message add the attribute `data-consent-status` to one or multiple DOM Elements. If you use the static cookie consent banner version you must define the status element before the `cookie-consent.min.js` import.
 
 ```html
 <div data-consent-status></div>
-<script src="cookie-consent.min.js"></script>
 ```
 
 ## Implement consent button
 
-To reopen the cookie consent banner you can add the attribute `data-consent-button` to one or multiple DOM Elements before the `cookie-consent.min.js` import.
+To reopen the cookie consent banner you can add the attribute `data-consent-button` to one or multiple DOM Elements. If you use the static cookie consent banner version you must define the this element before the `cookie-consent.min.js` import.
 
 ```html
 <button data-consent-button>Open consent banner</button>
-<script src="cookie-consent.min.js"></script>
 ```
 
 ## License
