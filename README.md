@@ -142,7 +142,7 @@ The parameters `dateFormat` and `timeFormat` controlling the output of date and 
 
 ## Output Status message
 
-To output the consent status message add the attribute `data-consent-status` to one or multiple DOM Elements. If you use the static cookie consent banner version you must define the status element before the `cookie-consent.min.js` import.
+To output the consent status message add the attribute `data-consent-status` to one or multiple DOM Elements. If you use the static banner version you must define the status element before the `cookie-consent.min.js` import.
 
 ```html
 <div data-consent-status></div>
@@ -150,10 +150,20 @@ To output the consent status message add the attribute `data-consent-status` to 
 
 ## Implement consent button
 
-To reopen the cookie consent banner you can add the attribute `data-consent-button` to one or multiple DOM Elements. If you use the static cookie consent banner version you must define the this element before the `cookie-consent.min.js` import.
+To reopen the cookie consent banner you can add the attribute `data-consent-button` to one or multiple DOM Elements. If you use the static banner version you must define this element before the `cookie-consent.min.js` import.
 
 ```html
 <button data-consent-button>Open consent banner</button>
+```
+
+## Trigger cookie scripts
+
+If the cookie consent has been accepted all script tags with the type `text/consent-banner-script` are loaded and afterwards attached to the end of the body. While the content inside the script tags due to the type was ignored the new attached scripts now changes to the correct javascript type `text/javascript`. The old placeholder script tags are removed afterwards from the DOM. If you use the static banner version you must define the script element before the `cookie-consent.min.js` import.
+
+```html
+<script type="text/consent_banner_script">
+    console.log('b.ig brother is watching you! 👀');
+</script>
 ```
 
 ## License
