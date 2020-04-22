@@ -72,13 +72,13 @@ The `Cookie.View` element holds the entire cookie consent banner. It provides mu
 | **className**               |  string  |                  ""                  |                      Name of additional CSS class to style the banner view                       |
 | **zIndex**                  |  number  |              undefined               | Value for CSS z-index property. It overrides existing z-index values in external CSS definitions |
 | **name**                    |  string  |           "cookie-consent"           |                                        Name of the cookie                                        |
+| **lifetime**                |  number  |                 365                  |                                  Lifetime of the cookie in days                                  |
 | **urlWhitelist**            | string[] |             Empty Array              |                       List of URLs on which no banner should be displayed                        |
 | **consentAcceptStatusMsg**  |  string  | "Akzeptiert am %DATE% um %TIME% Uhr" |            Message that should be displayed to inform about the cookie consent status            |
 | **consentDeclineStatusMsg** |  string  | "Abgelehnt am %DATE% um %TIME% Uhr"  |            Message that should be displayed to inform about the cookie consent status            |
 | **noCookieStatusMsg**       |  string  |                 "-"                  |            Message that should be displayed to inform about the cookie consent status            |
 | **dateFormat**              |  string  |              "dd.mm.yy"              |              Defines how to display date informations inside cookie consent status               |
 | **timeFormat**              |  string  |               "hh:mm"                |              Defines how to display time informations inside cookie consent status               |
-| **lifetime**                |  number  |                 365                  |                                  Lifetime of the cookie in days                                  |
 
 Inside the `Cookie.View` element it is necessary to define a function with the following props (called RenderProps):
 
