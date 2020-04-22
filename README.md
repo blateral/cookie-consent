@@ -107,6 +107,16 @@ For non-react projects it is possible to import the cookie consent banner as a s
 </div>
 ```
 
+In addition to the already mentioned properties above the static version takes parameters to define content values:
+
+| Name             |  Type  |           Default            |              Description               |
+| ---------------- | :----: | :--------------------------: | :------------------------------------: |
+| **icon**         | string |        "" (no image)         |           URL to icon image            |
+| **title**        | string |        "" (no title)         |        Title text of the banner        |
+| **text**         | string | "Wir verwenden Cookies, ..." |      Main body text of the banner      |
+| **labelAccept**  | string |    "Cookies akzeptieren"     | Text of consent accept action element  |
+| **labelDecline** | string |      "Cookies ablehnen"      | Text of consent decline action element |
+
 ## Date and Time formats
 
 To show the date and time of the last cookie consent interaction inside the status message you can pass specific placeholders to the string. They are replaced with the values on runtime.
