@@ -206,12 +206,12 @@ if ($mountPointCookie) {
 
     bindConsentButtons(() => store.setState({ isVisible: true }));
     const cookie = getCookie(name) as Cookie<CookieConsentData>;
-    const containsWhitelist = isUrlInWhitelist(
+    const isInWhitelist = isUrlInWhitelist(
         window.location.pathname,
         urlWhitelist
     );
 
-    if (!containsWhitelist) store.setState({ isVisible: !cookie });
+    if (!isInWhitelist) store.setState({ isVisible: !cookie });
     if (cookie && cookie.data.consent) {
         activateTrackingScripts();
     }

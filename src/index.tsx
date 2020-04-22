@@ -63,7 +63,6 @@ const CookieConsent: React.FC<CookieConfigInitialProps & {
             window.location.pathname,
             urlWhitelist
         );
-
         if (!containsWhitelist) setIsVisible(!cookie);
         if (cookie && cookie.data.consent) {
             activateTrackingScripts();
