@@ -127,7 +127,7 @@ For non-react projects it is possible to import the cookie consent banner as a s
 </div>
 ```
 
-In addition to the already in den React section mentioned properties the static version takes parameters to define content values:
+In addition to the already in the React section mentioned properties the static version takes parameters to define content values:
 
 | Name             |  Type  |           Default            |              Description               |
 | ---------------- | :----: | :--------------------------: | :------------------------------------: |
