@@ -13,6 +13,26 @@ This repository consist of a generic implementation of a cookie consent banner f
 npm install --save cookie-consent
 ```
 
+## Run app for developement
+
+In root directory:
+
+| Command                |                          Description                          |
+| ---------------------- | :-----------------------------------------------------------: |
+| `npm install`          |                       Install packages                        |
+| `npm run start`        |     Compile react component to dist and start dev server      |
+| `npm run build`        |                Compile react component to dist                |
+| `npm run start:static` | Compile static version to example-static and start dev server |
+| `npm run build:static` |           Compile static version to example-static            |
+
+In example directory:
+
+| Command         |                  Description                   |
+| --------------- | :--------------------------------------------: |
+| `npm install`   |     Install packages of example react app      |
+| `npm run start` | Compile example react app and start dev server |
+| `npm run build` |           Compile example react app            |
+
 ## Usage
 
 ### Use as React Component
@@ -107,7 +127,7 @@ For non-react projects it is possible to import the cookie consent banner as a s
 </div>
 ```
 
-In addition to the already mentioned properties above the static version takes parameters to define content values:
+In addition to the already in den React section mentioned properties the static version takes parameters to define content values:
 
 | Name             |  Type  |           Default            |              Description               |
 | ---------------- | :----: | :--------------------------: | :------------------------------------: |
@@ -165,6 +185,13 @@ If the cookie consent has been accepted all script tags with the type `text/cons
     console.log('b.ig brother is watching you! 👀');
 </script>
 ```
+
+## Styling
+
+Both the react component and the static version use predefined style classes. They are defined in the `styles.css` file.
+
+-   Styles for the react component are placed in `dist/index.css`
+-   Styles for the static version are placed in `example-static/styles.css`
 
 ## License
 
