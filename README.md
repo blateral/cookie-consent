@@ -13,7 +13,7 @@ This repository consist of a generic implementation of a cookie consent banner f
 npm install --save cookie-consent
 ```
 
-## Run app for developement
+## Commands
 
 In root directory:
 
