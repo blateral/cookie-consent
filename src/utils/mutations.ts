@@ -1,4 +1,4 @@
-import { formatCookieStatusString } from "./formatter";
+import { StatusFormatter } from "./formatter";
 import { CookieConsentData, Cookie } from "./cookie";
 
 export const bindConsentButtons = (callback: () => void) => {
@@ -59,12 +59,14 @@ export const updateConsentStatusElements = (
     );
 
     // render status inside defined dom elements without react
+    const formatter = new StatusFormatter(
+        cookie?.data.updatedAt,
+        status,
+        dateFormat,
+        timeFormat
+    );
+
     for (var i = 0, len = allConsentStatusElements.length; i < len; i++) {
-        allConsentStatusElements[i].innerHTML = formatCookieStatusString(
-            cookie?.data,
-            status,
-            dateFormat,
-            timeFormat
-        );
+        allConsentStatusElements[i].innerHTML = formatter.getFormattedStatus();
     }
 };

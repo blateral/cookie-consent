@@ -1,121 +1,154 @@
-import { CookieConsentData } from "./cookie";
-
 interface DateReplacementHolder {
-    [key: string]: (date: Date) => string;
+    [key: string]: () => string;
 }
 
-export const formatCookieStatusString = (
-    cookie: CookieConsentData | undefined,
-    str: string,
-    dateFormat: string,
-    timeFormat: string
-) => {
-    const placeholders: {
-        [key: string]: any;
-    } = {
-        "%DATE%": cookie ? getFormattedDate(cookie.updatedAt, dateFormat) : "",
-        "%TIME%": cookie ? getFormattedTime(cookie.updatedAt, timeFormat) : ""
+export class StatusFormatter {
+    private timestamp: number;
+    private input: string;
+    private dateFormat: string;
+    private timeFormat: string;
+
+    // private localeKey: string;
+    private date: Date;
+
+    constructor(
+        timestamp: number,
+        input: string,
+        dateFormat: string,
+        timeFormat: string
+        // localeKey?: string
+    ) {
+        this.timestamp = timestamp;
+        this.input = input;
+        this.dateFormat = dateFormat;
+        this.timeFormat = timeFormat;
+
+        // this.localeKey = localeKey ? localeKey : "de";
+        this.date = new Date(this.timestamp);
+    }
+
+    private dateReplacements: DateReplacementHolder = {
+        dd: () => {
+            return this.getDay();
+        },
+        DD: () => {
+            return this.getDay();
+        },
+        mm: () => {
+            return this.getMonth();
+        },
+        MM: () => {
+            return this.getMonth();
+        },
+        yy: () => {
+            return this.getYear();
+        },
+        YY: () => {
+            return this.getYear();
+        }
     };
 
-    str = str.replace(/%\w+%/g, foundString => {
-        return placeholders[foundString] || foundString;
-    });
-    return str;
-};
+    private timeReplacements: DateReplacementHolder = {
+        hh: () => {
+            return this.getHours();
+        },
+        HH: () => {
+            return this.getHours();
+        },
+        mm: () => {
+            return this.getMinutes();
+        },
+        MM: () => {
+            return this.getMinutes();
+        },
+        ss: () => {
+            return this.getSeconds();
+        },
+        SS: () => {
+            return this.getSeconds();
+        }
+    };
 
-const getFormattedDate = (timestamp: number, format: string) => {
-    const date = new Date(timestamp);
+    public setDate(timestamp: number) {
+        this.date = new Date(timestamp);
+    }
 
-    // replace placeholders with values from dateReplacements object
-    let dataKeys = Object.keys(dateReplacements);
-    for (let i = 0; i < dataKeys.length; i++) {
-        format = format.replace(new RegExp(dataKeys[i], "g"), foundString => {
-            return dateReplacements[foundString](date);
+    /*
+    public setLocale(localeKey: string) {
+        this.localeKey = localeKey;
+    }
+    */
+
+    public getFormattedStatus() {
+        const placeholders: {
+            [key: string]: any;
+        } = {
+            "%DATE%": this.getFormattedDate(),
+            "%TIME%": this.getFormattedTime()
+        };
+
+        const formattedInput = this.input.replace(/%\w+%/g, foundString => {
+            return placeholders[foundString] || foundString;
         });
+        return formattedInput;
     }
-    return format;
-};
 
-const getFormattedTime = (timestamp: number, format: string) => {
-    const date = new Date(timestamp);
-
-    // replace placeholders with values from timeReplacements object
-    let dataKeys = Object.keys(timeReplacements);
-    for (let i = 0; i < dataKeys.length; i++) {
-        format = format.replace(new RegExp(dataKeys[i], "g"), foundString => {
-            return timeReplacements[foundString](date);
-        });
+    public getFormattedDate() {
+        // replace placeholders with values from dateReplacements object
+        let dataKeys = Object.keys(this.dateReplacements);
+        let formattedDate = this.dateFormat;
+        for (let i = 0; i < dataKeys.length; i++) {
+            formattedDate = formattedDate.replace(
+                new RegExp(dataKeys[i], "g"),
+                foundString => {
+                    return this.dateReplacements[foundString].call(this);
+                }
+            );
+        }
+        return formattedDate;
     }
-    return format;
-};
 
-const dateReplacements: DateReplacementHolder = {
-    dd: (date: Date) => {
-        return getDay(date);
-    },
-    DD: (date: Date) => {
-        return getDay(date);
-    },
-    mm: (date: Date) => {
-        return getMonth(date);
-    },
-    MM: (date: Date) => {
-        return getMonth(date);
-    },
-    yy: (date: Date) => {
-        return getYear(date);
-    },
-    YY: (date: Date) => {
-        return getYear(date);
+    public getFormattedTime() {
+        // replace placeholders with values from timeReplacements object
+        let dataKeys = Object.keys(this.timeReplacements);
+        let formattedTime = this.timeFormat;
+        for (let i = 0; i < dataKeys.length; i++) {
+            formattedTime = formattedTime.replace(
+                new RegExp(dataKeys[i], "g"),
+                foundString => {
+                    return this.timeReplacements[foundString].call(this);
+                }
+            );
+        }
+        return formattedTime;
     }
-};
 
-const timeReplacements: DateReplacementHolder = {
-    hh: (date: Date) => {
-        return getHours(date);
-    },
-    HH: (date: Date) => {
-        return getHours(date);
-    },
-    mm: (date: Date) => {
-        return getMinutes(date);
-    },
-    MM: (date: Date) => {
-        return getMinutes(date);
-    },
-    ss: (date: Date) => {
-        return getSeconds(date);
-    },
-    SS: (date: Date) => {
-        return getSeconds(date);
+    private getDoubleDigitString(value: number) {
+        return value < 10 ? "0" + value.toString() : value.toString();
     }
-};
 
-const getDoubleDigitString = (value: number) => {
-    return value < 10 ? "0" + value.toString() : value.toString();
-};
+    private getDay() {
+        return this.getDoubleDigitString(this.date.getDate());
+    }
 
-const getDay = (date: Date) => {
-    return getDoubleDigitString(date.getDate());
-};
+    private getMonth() {
+        return this.getDoubleDigitString(this.date.getMonth() + 1);
+    }
 
-const getMonth = (date: Date) => {
-    return getDoubleDigitString(date.getMonth() + 1);
-};
+    private getYear(full: boolean = false) {
+        let year = this.date.getFullYear().toString();
+        return full ? year : year.substr(-2);
+    }
 
-const getYear = (date: Date, full: boolean = false) => {
-    let year = date.getFullYear().toString();
-    return full ? year : year.substr(-2);
-};
+    private getHours() {
+        return this.getDoubleDigitString(this.date.getHours());
+    }
 
-const getHours = (date: Date) => {
-    return getDoubleDigitString(date.getHours());
-};
+    private getMinutes() {
+        return this.getDoubleDigitString(this.date.getMinutes());
+    }
 
-const getMinutes = (date: Date) => {
-    return getDoubleDigitString(date.getMinutes());
-};
-
-const getSeconds = (date: Date) => {
-    return getDoubleDigitString(date.getSeconds());
-};
+    private getSeconds() {
+        return this.getDoubleDigitString(this.date.getSeconds());
+    }
+}
