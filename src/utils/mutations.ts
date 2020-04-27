@@ -52,7 +52,8 @@ export const updateConsentStatusElements = (
     cookie: Cookie<CookieConsentData>,
     status: string,
     dateFormat: string,
-    timeFormat: string
+    timeFormat: string,
+    localeKey: string = "de"
 ) => {
     const allConsentStatusElements = document.querySelectorAll(
         "[data-consent-status], .cookie-consent-status"
@@ -64,7 +65,7 @@ export const updateConsentStatusElements = (
         status,
         dateFormat,
         timeFormat,
-        "de"
+        localeKey
     );
 
     for (var i = 0, len = allConsentStatusElements.length; i < len; i++) {

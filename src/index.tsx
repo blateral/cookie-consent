@@ -48,7 +48,8 @@ const CookieConsent: React.FC<CookieConfigInitialProps & {
         consentDeclineStatusMsg,
         noCookieStatusMsg,
         dateFormat,
-        timeFormat
+        timeFormat,
+        localeKey
     } = {
         ...CookieConfigDefaults,
         ...props
@@ -78,7 +79,13 @@ const CookieConsent: React.FC<CookieConfigInitialProps & {
             ? consentAcceptStatusMsg
             : consentDeclineStatusMsg;
 
-        updateConsentStatusElements(cookie, str, dateFormat, timeFormat);
+        updateConsentStatusElements(
+            cookie,
+            str,
+            dateFormat,
+            timeFormat,
+            localeKey
+        );
     }, [isVisible]);
 
     if (!isVisible) return null;
