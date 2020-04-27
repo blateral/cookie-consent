@@ -27,7 +27,6 @@ export class StatusFormatter {
 
         this.localeKey = localeKey ? localeKey : "de";
         this.date = new Date(this.timestamp);
-        this.date = new Date("December 17, 1995 03:24:00");
     }
 
     private dateReplacements: DateReplacementHolder = {

@@ -149,16 +149,28 @@ To show the date and time of the last cookie consent interaction inside the stat
 
 The parameters `dateFormat` and `timeFormat` controlling the output of date and time:
 
-| Format         | Output                |    Example |
-| -------------- | :-------------------- | ---------: |
-| **dd.mm.yy**   | Day.Month.Year        |   06.11.94 |
-| **dd.mm.yy**   | Day.Month.Year        |   06.11.94 |
-| **dd.mm.yyyy** | Day.Month.FullYear    | 06.11.1994 |
-| **DD.MM.YY**   | Day.Month.Year        |   06.11.94 |
-| **DD.MM.YYYY** | Day.Month.FullYear    | 06.11.1994 |
-| **hh:mm**      | Hours:Minutes         |      18:35 |
-| **hh:mm:ss**   | Hours:Minutes:Seconds |   18:35:27 |
-| **HH:MM:SS**   | Hours:Minutes:Seconds |   18:35:27 |
+| Format         | Output                            |    Example |
+| -------------- | :-------------------------------- | ---------: |
+| **dd.mm.yy**   | Day.Month.Year                    |   06.11.94 |
+| **dd.mm.yy**   | Day.Month.Year                    |   06.11.94 |
+| **dd.mm.yyyy** | Day.Month.FullYear                | 06.11.1994 |
+| **DD.MM.YY**   | Day.Month.Year                    |   06.11.94 |
+| **DD.MM.YYYY** | Day.Month.FullYear                | 06.11.1994 |
+| **ddd**        | Week Day Short                    |       Mon. |
+| **DDD**        | Week Day Short                    |       Mon. |
+| **dddd**       | Week Day Long                     |     Montag |
+| **DDDD**       | Week Day Long                     |     Montag |
+| **mmm**        | Month Name Short                  |       Dez. |
+| **MMM**        | Month Name Short                  |       Dez. |
+| **mmmm**       | Month Name Long                   |   Dezember |
+| **MMMM**       | Month Name Long                   |   Dezember |
+| **hh:mm**      | Hours:Minutes                     |      18:35 |
+| **hh:mm:ss**   | Hours:Minutes:Seconds             |   18:35:27 |
+| **HH:MM:SS**   | Hours:Minutes:Seconds             |   18:35:27 |
+| **hs:mm**      | Hours (12 hour time used with ap) |      07:44 |
+| **HS:MM**      | Hours (12 hour time used with ap) |      07:44 |
+| **ap**         | Ante or Post meridiem             |   am OR pm |
+| **AP**         | Ante or Post meridiem             |   AM OR PM |
 
 ## Output Status message
 
