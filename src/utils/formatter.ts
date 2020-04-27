@@ -87,6 +87,12 @@ export class StatusFormatter {
         HH: () => {
             return this.getHours();
         },
+        hs: () => {
+            return this.getHours12h();
+        },
+        HS: () => {
+            return this.getHours12h();
+        },
         mm: () => {
             return this.getMinutes();
         },
@@ -98,6 +104,14 @@ export class StatusFormatter {
         },
         SS: () => {
             return this.getSeconds();
+        },
+        ap: () => {
+            const hours = this.date.getHours();
+            return hours >= 12 ? "pm" : "am";
+        },
+        AP: () => {
+            const hours = this.date.getHours();
+            return hours >= 12 ? "PM" : "AM";
         }
     };
 
@@ -171,6 +185,13 @@ export class StatusFormatter {
 
     private getHours() {
         return this.getDoubleDigitString(this.date.getHours());
+    }
+
+    private getHours12h() {
+        let hours = this.date.getHours();
+        hours = hours % 12;
+        hours = hours === 0 ? 12 : hours;
+        return this.getDoubleDigitString(hours);
     }
 
     private getMinutes() {
