@@ -63,7 +63,8 @@ export const updateConsentStatusElements = (
         cookie?.data.updatedAt,
         status,
         dateFormat,
-        timeFormat
+        timeFormat,
+        "de"
     );
 
     for (var i = 0, len = allConsentStatusElements.length; i < len; i++) {

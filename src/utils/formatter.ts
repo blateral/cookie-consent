@@ -1,3 +1,5 @@
+import { weekDays, monthNames } from "./data";
+
 interface DateReplacementHolder {
     [key: string]: () => string;
 }
@@ -8,31 +10,55 @@ export class StatusFormatter {
     private dateFormat: string;
     private timeFormat: string;
 
-    // private localeKey: string;
+    private localeKey: string;
     private date: Date;
 
     constructor(
         timestamp: number,
         input: string,
         dateFormat: string,
-        timeFormat: string
-        // localeKey?: string
+        timeFormat: string,
+        localeKey?: string
     ) {
         this.timestamp = timestamp;
         this.input = input;
         this.dateFormat = dateFormat;
         this.timeFormat = timeFormat;
 
-        // this.localeKey = localeKey ? localeKey : "de";
+        this.localeKey = localeKey ? localeKey : "de";
         this.date = new Date(this.timestamp);
     }
 
     private dateReplacements: DateReplacementHolder = {
+        dddd: () => {
+            return weekDays[this.localeKey].long[this.date.getDay()];
+        },
+        DDDD: () => {
+            return weekDays[this.localeKey].long[this.date.getDay()];
+        },
+        ddd: () => {
+            return weekDays[this.localeKey].short[this.date.getDay()];
+        },
+        DDD: () => {
+            return weekDays[this.localeKey].short[this.date.getDay()];
+        },
         dd: () => {
             return this.getDay();
         },
         DD: () => {
             return this.getDay();
+        },
+        MMMM: () => {
+            return monthNames[this.localeKey].long[this.date.getMonth()];
+        },
+        mmmm: () => {
+            return monthNames[this.localeKey].long[this.date.getMonth()];
+        },
+        MMM: () => {
+            return monthNames[this.localeKey].short[this.date.getMonth()];
+        },
+        mmm: () => {
+            return monthNames[this.localeKey].short[this.date.getMonth()];
         },
         mm: () => {
             return this.getMonth();
@@ -40,11 +66,17 @@ export class StatusFormatter {
         MM: () => {
             return this.getMonth();
         },
-        yy: () => {
+        yyyy: () => {
             return this.getYear();
         },
-        YY: () => {
+        YYYY: () => {
             return this.getYear();
+        },
+        yy: () => {
+            return this.getYear().substr(-2);
+        },
+        YY: () => {
+            return this.getYear().substr(-2);
         }
     };
 
@@ -73,11 +105,9 @@ export class StatusFormatter {
         this.date = new Date(timestamp);
     }
 
-    /*
     public setLocale(localeKey: string) {
         this.localeKey = localeKey;
     }
-    */
 
     public getFormattedStatus() {
         const placeholders: {
@@ -135,9 +165,8 @@ export class StatusFormatter {
         return this.getDoubleDigitString(this.date.getMonth() + 1);
     }
 
-    private getYear(full: boolean = false) {
-        let year = this.date.getFullYear().toString();
-        return full ? year : year.substr(-2);
+    private getYear() {
+        return this.date.getFullYear().toString();
     }
 
     private getHours() {
