@@ -156,8 +156,8 @@ The parameters `dateFormat` and `timeFormat` controlling the output of date and 
 | **dd.mm.yyyy** | Day.Month.FullYear                | 06.11.1994 |
 | **DD.MM.YY**   | Day.Month.Year                    |   06.11.94 |
 | **DD.MM.YYYY** | Day.Month.FullYear                | 06.11.1994 |
-| **ddd**        | Week Day Short                    |       Mon. |
-| **DDD**        | Week Day Short                    |       Mon. |
+| **ddd**        | Week Day Short                    |        Mo. |
+| **DDD**        | Week Day Short                    |        Mo. |
 | **dddd**       | Week Day Long                     |     Montag |
 | **DDDD**       | Week Day Long                     |     Montag |
 | **mmm**        | Month Name Short                  |       Dez. |
