@@ -99,6 +99,7 @@ The `Cookie.View` element holds the entire cookie consent banner. It provides mu
 | **noCookieStatusMsg**       |  string  |                 "-"                  |            Message that should be displayed to inform about the cookie consent status            |
 | **dateFormat**              |  string  |              "dd.mm.yy"              |              Defines how to display date informations inside cookie consent status               |
 | **timeFormat**              |  string  |               "hh:mm"                |              Defines how to display time informations inside cookie consent status               |
+| **localeKey**               |  string  |                 "de"                 |                                     Language ISO-639-1 Code                                      |
 
 Inside the `Cookie.View` element it is necessary to define a function with the following props (called RenderProps):
 
