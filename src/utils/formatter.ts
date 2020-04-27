@@ -30,7 +30,7 @@ const getFormattedDateFromTimestamp = (timestamp: number, format: string) => {
             case foundString === "dd" || foundString === "DD":
                 return getDoubleDigitStringFromNumber(date.getDate());
             case foundString === "mm" || "MM":
-                return getDoubleDigitStringFromNumber(date.getMonth());
+                return getDoubleDigitStringFromNumber(date.getMonth() + 1);
             case foundString === "yy" || foundString === "YY":
                 return date
                     .getFullYear()
