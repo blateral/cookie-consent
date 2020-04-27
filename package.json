@@ -1,6 +1,6 @@
 {
     "name": "@ic3m3n/cookie-consent",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "Generic consent cookie",
     "author": "Alexander Rieß<alexander.riess@blateral.com>, Lukas Wochner<lukas.wochner@blateral.com>",
     "license": "MIT",
@@ -31,6 +31,7 @@
         "react": "^16.0.0"
     },
     "devDependencies": {
+        "@types/node": "^13.13.2",
         "@types/react": "^16.9.27",
         "babel-eslint": "^10.0.3",
         "cross-env": "^7.0.2",
@@ -59,6 +60,5 @@
     },
     "files": [
         "dist"
-    ],
-    "dependencies": {}
+    ]
 }
