@@ -8,6 +8,7 @@ export interface CookieConfig {
     dateFormat: string;
     timeFormat: string;
     lifetime: number;
+    localeKey?: string;
 }
 
 export type CookieConfigInitialProps = Partial<CookieConfig>;
@@ -19,7 +20,8 @@ export const CookieConfigDefaults: CookieConfig = {
     noCookieStatusMsg: "-",
     dateFormat: "dd.mm.yy",
     timeFormat: "hh:mm",
-    lifetime: 365
+    lifetime: 365,
+    localeKey: "de"
 };
 
 export interface CookieContent {

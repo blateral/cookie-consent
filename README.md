@@ -99,6 +99,7 @@ The `Cookie.View` element holds the entire cookie consent banner. It provides mu
 | **noCookieStatusMsg**       |  string  |                 "-"                  |            Message that should be displayed to inform about the cookie consent status            |
 | **dateFormat**              |  string  |              "dd.mm.yy"              |              Defines how to display date informations inside cookie consent status               |
 | **timeFormat**              |  string  |               "hh:mm"                |              Defines how to display time informations inside cookie consent status               |
+| **localeKey**               |  string  |                 "de"                 |                                     Language ISO-639-1 Code                                      |
 
 Inside the `Cookie.View` element it is necessary to define a function with the following props (called RenderProps):
 
@@ -149,16 +150,28 @@ To show the date and time of the last cookie consent interaction inside the stat
 
 The parameters `dateFormat` and `timeFormat` controlling the output of date and time:
 
-| Format         | Output                |    Example |
-| -------------- | :-------------------- | ---------: |
-| **dd.mm.yy**   | Day.Month.Year        |   06.11.94 |
-| **dd.mm.yy**   | Day.Month.Year        |   06.11.94 |
-| **dd.mm.yyyy** | Day.Month.FullYear    | 06.11.1994 |
-| **DD.MM.YY**   | Day.Month.Year        |   06.11.94 |
-| **DD.MM.YYYY** | Day.Month.FullYear    | 06.11.1994 |
-| **hh:mm**      | Hours:Minutes         |      18:35 |
-| **hh:mm:ss**   | Hours:Minutes:Seconds |   18:35:27 |
-| **HH:MM:SS**   | Hours:Minutes:Seconds |   18:35:27 |
+| Format         | Output                            |    Example |
+| -------------- | :-------------------------------- | ---------: |
+| **dd.mm.yy**   | Day.Month.Year                    |   06.11.94 |
+| **dd.mm.yy**   | Day.Month.Year                    |   06.11.94 |
+| **dd.mm.yyyy** | Day.Month.FullYear                | 06.11.1994 |
+| **DD.MM.YY**   | Day.Month.Year                    |   06.11.94 |
+| **DD.MM.YYYY** | Day.Month.FullYear                | 06.11.1994 |
+| **ddd**        | Week Day Short                    |        Mo. |
+| **DDD**        | Week Day Short                    |        Mo. |
+| **dddd**       | Week Day Long                     |     Montag |
+| **DDDD**       | Week Day Long                     |     Montag |
+| **mmm**        | Month Name Short                  |       Dez. |
+| **MMM**        | Month Name Short                  |       Dez. |
+| **mmmm**       | Month Name Long                   |   Dezember |
+| **MMMM**       | Month Name Long                   |   Dezember |
+| **hh:mm**      | Hours:Minutes                     |      18:35 |
+| **hh:mm:ss**   | Hours:Minutes:Seconds             |   18:35:27 |
+| **HH:MM:SS**   | Hours:Minutes:Seconds             |   18:35:27 |
+| **hs:mm**      | Hours (12 hour time used with ap) |      07:44 |
+| **HS:MM**      | Hours (12 hour time used with ap) |      07:44 |
+| **ap**         | Ante or Post meridiem             |   am OR pm |
+| **AP**         | Ante or Post meridiem             |   AM OR PM |
 
 ## Output Status message
 

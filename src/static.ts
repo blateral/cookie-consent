@@ -138,6 +138,7 @@ if ($mountPointCookie) {
         noCookieStatusMsg,
         dateFormat,
         timeFormat,
+        localeKey,
         icon,
         title,
         text,
@@ -205,7 +206,13 @@ if ($mountPointCookie) {
             ? consentAcceptStatusMsg
             : consentDeclineStatusMsg;
 
-        updateConsentStatusElements(cookie, str, dateFormat, timeFormat);
+        updateConsentStatusElements(
+            cookie,
+            str,
+            dateFormat,
+            timeFormat,
+            localeKey
+        );
     };
 
     store.subscribe(updateStatusElements);
