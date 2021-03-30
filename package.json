@@ -62,12 +62,10 @@
         "react-scripts": "^3.4.1",
         "ts-loader": "^7.0.1",
         "webpack-cli": "^3.3.11",
-        "webpack-dev-server": "^3.10.3"
+        "webpack-dev-server": "^3.10.3",
+        "husky": "4.3.0"
     },
     "files": [
         "dist"
-    ],
-    "dependencies": {
-        "husky": "4.3.0"
-    }
+    ]
 }
