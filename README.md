@@ -191,10 +191,10 @@ To reopen the cookie consent banner you can add the attribute `data-consent-butt
 
 ## Trigger cookie scripts
 
-If the cookie consent has been accepted all script tags with the type `text/consent-banner-script` are loaded and afterwards attached to the end of the body. While the content inside the script tags due to the type was ignored the new attached scripts now changes to the correct javascript type `text/javascript`. The old placeholder script tags are removed afterwards from the DOM. If you use the static banner version you must define the script element before the `cookie-consent.min.js` import.
+If the cookie consent has been accepted all script tags with the type `text/cookie-consent-script` are loaded and afterwards attached to the end of the body. While the content inside the script tags due to the type was ignored the new attached scripts now changes to the correct javascript type `text/javascript`. The old placeholder script tags are removed afterwards from the DOM. If you use the static banner version you must define the script element before the `cookie-consent.min.js` import.
 
 ```html
-<script type="text/consent-banner-script">
+<script type="text/cookie-consent-script">
     console.log('b.ig brother is watching you! 👀');
 </script>
 ```

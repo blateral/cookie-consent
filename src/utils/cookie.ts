@@ -66,7 +66,7 @@ export const setCookie = <T>(
     let valueString = "";
     let dataKeys = Object.keys(data);
     for (let i = 0; i < dataKeys.length; i++) {
-        valueString += `${dataKeys[i]}=${data[dataKeys[i]]}|`;
+        valueString += `${dataKeys[i]}:${data[dataKeys[i]]}|`;
     }
 
     cookieString += encodeURIComponent(
@@ -95,7 +95,7 @@ export const getCookie = <T>(name: string): Cookie<T> | undefined => {
 
     if (cookieValue) {
         const valueArray = cookieValue.split("|").map(el => {
-            const keyValueArray = el.split("=");
+            const keyValueArray = el.split(":");
             return {
                 key: keyValueArray[0],
                 value: keyValueArray[1]

@@ -19,7 +19,7 @@ export const activateTrackingScripts = () => {
     let i = scriptElements.length;
     while (i--) {
         // create new script element to call it
-        let newScriptElement = document.createElement("script");
+        const newScriptElement = document.createElement("script");
         newScriptElement.type = "text/javascript";
         newScriptElement.innerHTML = scriptElements[i].innerHTML;
 
@@ -28,9 +28,9 @@ export const activateTrackingScripts = () => {
 
         // delete old helper element
         if (scriptElements[i].parentNode) {
+            // eslint-disable-next-line no-unused-expressions
             scriptElements[i].parentNode?.removeChild(scriptElements[i]);
         }
-        // scriptElements[i].remove();
     }
 };
 
