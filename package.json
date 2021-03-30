@@ -28,6 +28,11 @@
         "deploy": "gh-pages -d example/build",
         "tc": "tsc --noEmit"
     },
+    "husky": {
+        "hooks": {
+            "pre-push": "yarn tc"
+        }
+    },
     "peerDependencies": {
         "react": "^16.0.0"
     },
@@ -61,5 +66,8 @@
     },
     "files": [
         "dist"
-    ]
+    ],
+    "dependencies": {
+        "husky": "4.3.0"
+    }
 }
