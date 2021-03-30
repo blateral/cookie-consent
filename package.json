@@ -1,6 +1,6 @@
 {
-    "name": "@ic3m3n/cookie-consent",
-    "version": "0.2.3",
+    "name": "@blateral/cookie-consent",
+    "version": "0.2.4",
     "description": "Generic consent cookie",
     "author": "Alexander Rieß<alexander.riess@blateral.com>, Lukas Wochner<lukas.wochner@blateral.com>",
     "license": "MIT",
@@ -25,7 +25,13 @@
         "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
         "test:watch": "react-scripts test --env=jsdom",
         "predeploy": "cd example && yarn install && yarn run build",
-        "deploy": "gh-pages -d example/build"
+        "deploy": "gh-pages -d example/build",
+        "tc": "tsc --noEmit"
+    },
+    "husky": {
+        "hooks": {
+            "pre-push": "yarn tc"
+        }
     },
     "peerDependencies": {
         "react": "^16.0.0"
@@ -56,7 +62,8 @@
         "react-scripts": "^3.4.1",
         "ts-loader": "^7.0.1",
         "webpack-cli": "^3.3.11",
-        "webpack-dev-server": "^3.10.3"
+        "webpack-dev-server": "^3.10.3",
+        "husky": "4.3.0"
     },
     "files": [
         "dist"

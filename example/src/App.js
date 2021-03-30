@@ -5,7 +5,7 @@ import "cookie-consent/dist/index.css";
 
 const App = () => {
     return (
-        <Cookie.View>
+        <Cookie.View dateFormat="DD. MMMM YYYY">
             {({
                 handleAccept,
                 handleDecline,
