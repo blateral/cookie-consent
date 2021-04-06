@@ -91,10 +91,10 @@ const CookieConsent: React.FC<CookieConfigInitialProps & {
     if (!isVisible) return null;
     return (
         <div
-            className={`${styles.CookieConsent} ${className}`}
+            className={`${styles.CookieConsent}`}
             style={zIndex ? { zIndex } : {}}
         >
-            <div className={styles.CookieConsent__content}>
+            <div className={`${styles.CookieConsent__content} ${className}`}>
                 {children({
                     handleDecline: () => {
                         console.log("decline");
