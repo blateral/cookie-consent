@@ -141,3 +141,5 @@ export default {
     ActionContainer,
     Action
 };
+
+export { setCookie, getCookie, deleteCookie } from "./utils/cookie";
