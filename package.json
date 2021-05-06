@@ -1,6 +1,6 @@
 {
     "name": "@blateral/cookie-consent",
-    "version": "0.2.6",
+    "version": "0.2.7",
     "description": "Generic consent cookie",
     "author": "Alexander Rieß<alexander.riess@blateral.com>, Lukas Wochner<lukas.wochner@blateral.com>",
     "license": "MIT",
