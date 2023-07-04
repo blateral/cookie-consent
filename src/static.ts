@@ -41,6 +41,7 @@ const createStore = (initialState = {}) => {
 const buildCookieMarkup = ({
     icon,
     title,
+    titleAs,
     text,
     labelAccept,
     labelDecline,
@@ -71,7 +72,22 @@ const buildCookieMarkup = ({
     }
 
     if (title) {
-        const $CookieTitle = document.createElement("h2");
+        const possibleTitleTags = [
+            "h1",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "div"
+        ];
+        const titleTag =
+            possibleTitleTags.indexOf(titleAs || "") >= 0
+                ? titleAs || "div"
+                : "div";
+
+        const $CookieTitle = document.createElement(titleTag);
         $CookieTitle.className = "CookieConsent__title";
         $CookieTitle.innerHTML = title;
 
@@ -141,6 +157,7 @@ if ($mountPointCookie) {
         localeKey,
         icon,
         title,
+        titleAs,
         text,
         labelAccept,
         labelDecline
@@ -155,6 +172,7 @@ if ($mountPointCookie) {
     const $Cookie = buildCookieMarkup({
         icon,
         title,
+        titleAs,
         text,
         labelAccept,
         labelDecline,
