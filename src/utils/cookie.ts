@@ -27,6 +27,7 @@ export const CookieConfigDefaults: CookieConfig = {
 export interface CookieContent {
     icon?: string;
     title?: string;
+    titleAs?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div";
     text: string;
     labelAccept: string;
     labelDecline: string;
