@@ -198,7 +198,7 @@ if ($mountPointCookie) {
 
     const store = createStore({
         isVisible: false,
-        accepted: !!cookie.data.consent
+        accepted: cookie && cookie.data ? !!cookie.data.consent : false
     });
 
     (window as any).blatCookieConsent = {
