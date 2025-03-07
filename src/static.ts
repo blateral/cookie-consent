@@ -18,6 +18,27 @@ import {
     updateConsentStatusElements
 } from "./utils/mutations";
 
+interface Store {
+    getState: () => {
+        [key: string]: any;
+    };
+    setState: (newState: any) => void;
+    subscribe: (l: any) => void;
+    unsubscribe: (l: any) => void;
+}
+
+interface GlobalCookieConsentState {
+    $container: Element;
+    icon?: string;
+    title?: string;
+    text?: string;
+    labelAccept?: string;
+    labelDecline?: string;
+    zIndex?: number;
+
+    store: Store;
+}
+
 const createStore = (initialState = {}) => {
     let state: { [key: string]: any } = initialState;
     let listeners: Array<() => void> = [];
@@ -30,10 +51,16 @@ const createStore = (initialState = {}) => {
                 ...newState
             };
 
-            listeners.forEach(l => l());
+            listeners.forEach(l => l && l());
         },
         subscribe: (l: any) => {
             listeners = [...listeners, l];
+        },
+        unsubscribe: (l: any) => {
+            const index = listeners.indexOf(l);
+            if (index > -1) {
+                listeners.splice(index, 1);
+            }
         }
     };
 };
@@ -167,7 +194,23 @@ if ($mountPointCookie) {
         ...initialState
     } as CookieConfig & CookieContent;
 
-    const store = createStore({ isVisible: false });
+    const cookie = getCookie(name) as Cookie<CookieConsentData>;
+
+    const store = createStore({
+        isVisible: false,
+        accepted: !!cookie.data.consent
+    });
+
+    (window as any).blatCookieConsent = {
+        $container: $mountPointCookie,
+        icon,
+        title,
+        text,
+        labelAccept,
+        labelDecline,
+        zIndex,
+        store
+    } as GlobalCookieConsentState;
 
     const $Cookie = buildCookieMarkup({
         icon,
@@ -188,7 +231,7 @@ if ($mountPointCookie) {
                 lifetime
             );
 
-            store.setState({ isVisible: false });
+            store.setState({ isVisible: false, accepted: false });
         },
         handleAccept: () => {
             console.log("accept");
@@ -200,7 +243,7 @@ if ($mountPointCookie) {
                 },
                 lifetime
             );
-            store.setState({ isVisible: false });
+            store.setState({ isVisible: false, accepted: true });
             activateTrackingScripts();
         }
     });
@@ -237,7 +280,6 @@ if ($mountPointCookie) {
     updateStatusElements();
 
     bindConsentButtons(() => store.setState({ isVisible: true }));
-    const cookie = getCookie(name) as Cookie<CookieConsentData>;
     const isInWhitelist = isUrlInWhitelist(
         window.location.pathname,
         urlWhitelist
