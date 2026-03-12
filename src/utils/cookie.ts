@@ -8,6 +8,7 @@ export interface CookieConfig {
     dateFormat: string;
     timeFormat: string;
     lifetime: number;
+    domain?: string;
     localeKey?: string;
 }
 
@@ -55,12 +56,19 @@ export interface Cookie<T> {
     data: T;
 }
 
-export const setCookie = <T>(
-    name: string,
-    data: T,
-    days: number = -1,
-    path: string = "/"
-) => {
+export const setCookie = <T>({
+    name,
+    data,
+    days = -1,
+    path = "/",
+    domain
+}: {
+    name: string;
+    data: T;
+    days?: number;
+    path?: string;
+    domain?: string;
+}) => {
     let cookieString = `${name}=`;
 
     // set cookie value
@@ -76,6 +84,11 @@ export const setCookie = <T>(
 
     // specify path
     cookieString += `; path=${path};`;
+
+    // specify domain
+    if (domain) {
+        cookieString += ` domain=${domain};`;
+    }
 
     // check if cookie should have lifetime
     if (days >= 0) {
@@ -126,7 +139,7 @@ export const getCookie = <T>(name: string): Cookie<T> | undefined => {
 };
 
 export const deleteCookie = (name: string) => {
-    setCookie<any>(name, {}, 0);
+    setCookie<any>({ name, data: {}, days: 0 });
 };
 
 const stringToBoolean = (value: string | number | boolean) => {

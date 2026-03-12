@@ -175,6 +175,7 @@ if ($mountPointCookie) {
         zIndex,
         name,
         lifetime,
+        domain,
         urlWhitelist,
         consentAcceptStatusMsg,
         consentDeclineStatusMsg,
@@ -222,27 +223,29 @@ if ($mountPointCookie) {
         zIndex,
         handleDecline: () => {
             console.log("decline");
-            setCookie<CookieConsentData>(
+            setCookie<CookieConsentData>({
                 name,
-                {
+                data: {
                     consent: false,
                     updatedAt: new Date().getTime()
                 },
-                lifetime
-            );
+                days: lifetime,
+                domain
+            });
 
             store.setState({ isVisible: false, accepted: false });
         },
         handleAccept: () => {
             console.log("accept");
-            setCookie<CookieConsentData>(
+            setCookie<CookieConsentData>({
                 name,
-                {
+                data: {
                     consent: true,
                     updatedAt: new Date().getTime()
                 },
-                lifetime
-            );
+                days: lifetime,
+                domain
+            });
             store.setState({ isVisible: false, accepted: true });
             activateTrackingScripts();
         }
