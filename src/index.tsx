@@ -43,6 +43,7 @@ const CookieConsent: React.FC<CookieConfigInitialProps & {
         zIndex,
         name,
         lifetime,
+        domain,
         urlWhitelist,
         consentAcceptStatusMsg,
         consentDeclineStatusMsg,
@@ -98,26 +99,28 @@ const CookieConsent: React.FC<CookieConfigInitialProps & {
                 {children({
                     handleDecline: () => {
                         console.log("decline");
-                        setCookie<CookieConsentData>(
+                        setCookie<CookieConsentData>({
                             name,
-                            {
+                            data: {
                                 consent: false,
                                 updatedAt: new Date().getTime()
                             },
-                            lifetime
-                        );
+                            days: lifetime,
+                            domain
+                        });
                         setIsVisible(false);
                     },
                     handleAccept: () => {
                         console.log("accept");
-                        setCookie<CookieConsentData>(
+                        setCookie<CookieConsentData>({
                             name,
-                            {
+                            data: {
                                 consent: true,
                                 updatedAt: new Date().getTime()
                             },
-                            lifetime
-                        );
+                            days: lifetime,
+                            domain
+                        });
                         setIsVisible(false);
                         activateTrackingScripts();
                     },
